@@ -81,3 +81,46 @@ scrollToTopBtn.addEventListener('click', () => {
 });
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    // Navbar Active Link Highlighting
+    const navLinks = document.querySelectorAll(".nav-link");
+    navLinks.forEach(link => {
+        link.addEventListener("click", function () {
+            navLinks.forEach(nav => nav.classList.remove("active"));
+            this.classList.add("active");
+        });
+    });
+
+    // Smooth Scrolling for Internal Links
+    const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
+    smoothScrollLinks.forEach(link => {
+        link.addEventListener("click", function (event) {
+            event.preventDefault();
+            const targetId = this.getAttribute("href").substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
+
+    // Discount Offer Pop-up (Shown Once)
+    setTimeout(() => {
+        alert("🔥 Get 25% off on our new furniture collection. Limited time only!");
+    }, 3000); // Show after 3 seconds
+
+    // Image Hover Effect on Product Cards
+    const productImages = document.querySelectorAll(".card img");
+    productImages.forEach(img => {
+        img.addEventListener("mouseover", function () {
+            this.style.transform = "scale(1.05)";
+            this.style.transition = "transform 0.3s ease-in-out";
+        });
+        img.addEventListener("mouseout", function () {
+            this.style.transform = "scale(1)";
+        });
+    });
+});
