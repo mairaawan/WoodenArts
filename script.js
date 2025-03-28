@@ -119,6 +119,64 @@ document.addEventListener("DOMContentLoaded", function () {
             this.style.transform = "scale(1.05)";
             this.style.transition = "transform 0.3s ease-in-out";
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+    // Highlight Active FAQ
+    const faqButtons = document.querySelectorAll(".accordion-button");
+    faqButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            faqButtons.forEach(btn => btn.classList.remove("active"));
+            this.classList.add("active");
+        });
+    });
+
+    // Zoom-in Effect on FAQ Icons
+    const faqIcons = document.querySelectorAll(".faq-icon");
+    faqIcons.forEach(icon => {
+        icon.addEventListener("click", function () {
+            this.style.transform = "scale(1.5)";
+            this.style.transition = "transform 0.3s ease-in-out";
+            setTimeout(() => {
+                this.style.transform = "scale(1)";
+            }, 1000);
+        });
+    });
+
+    // Smooth Scroll to FAQ
+    const faqLinks = document.querySelectorAll('a[href^="#"]');
+    faqLinks.forEach(link => {
+        link.addEventListener("click", function (event) {
+            event.preventDefault();
+            const targetId = this.getAttribute("href").substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
+
+    // Back to Top Button
+    const backToTop = document.createElement("button");
+    backToTop.innerHTML = "⬆";
+    backToTop.classList.add("back-to-top");
+    document.body.appendChild(backToTop);
+
+    window.addEventListener("scroll", function () {
+        if (window.scrollY > 300) {
+            backToTop.style.display = "block";
+        } else {
+            backToTop.style.display = "none";
+        }
+    });
+
+    backToTop.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+});
+
         img.addEventListener("mouseout", function () {
             this.style.transform = "scale(1)";
         });
